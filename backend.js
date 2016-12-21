@@ -10,7 +10,7 @@ const mongoose = require('mongoose'),
 
 mongoose.Promise = bluebird;
 app.use(bodyParser.json());
-// app.use(express.static('public'));
+app.use(express.static('public'));
 
 mongoose.connect('mongodb://localhost/happyplace_db');
 
@@ -107,6 +107,19 @@ app.get('/profile/:username', function(req, res) {
   ])
   .spread(function(user, happyplaces) {
     res.json({username: user._id, email: user.email, happyplaces: happyplaces});
+  })
+  .catch(function(err) {
+    res.json({message: 'you got an error', error: err});
+  });
+});
+
+app.get('/myhappyplaces/:username', function(req, res) {
+  var username = req.params.username;
+  console.log('the username is below');
+  console.log(username);
+  Happyplace.find({userID: username})
+  .then(function(data) {
+    res.json(data);
   })
   .catch(function(err) {
     res.json({message: 'you got an error', error: err});
