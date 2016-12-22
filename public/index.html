@@ -2,7 +2,7 @@
 <html ng-app="happyplace">
   <head>
     <meta charset="utf-8">
-    <title>example</title>
+    <title>HappyPlace</title>
     <!-- <script src="leaflet/leaflet.js"></script> -->
     <script src="js/angular.js"></script>
     <script src="js/angular-ui-router.js"></script>
@@ -11,19 +11,26 @@
     <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
     <!-- <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script> -->
     <script src="js/leaflet.markercluster.js"></script>
+    <!-- <script src="js/leaflet.awesome-markers.js"></script>
+    <script src="js/leaflet.extra-markers.min.js"></script> -->
+    <!-- <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzFn6UY4yHr2dizzPNpjD5TEkaO8gyBAQ&sensor=false">
+    </script> -->
     <script src="js/frontend.js"></script>
     <!-- <link rel="stylesheet" href="leaflet/leaflet.css"> -->
     <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" /> -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css">
     <link rel="stylesheet" href="css/MarkerCluster.css">
     <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+    <!-- <link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+    <link rel="stylesheet" href="css/leaflet.extra-markers.min.css"> -->
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <!-- <body> -->
   <body>
     <div class="header">
       <p>HappyPlace</p>
-      <p>Lat: {{lat}}, Lng: {{lng}}</p>
       <button ng-click="addHappyPlace()">Make New Happy Place</button>
     </div>
     <!-- <div class="map">

@@ -2,14 +2,15 @@
 
 var app = angular.module('happyplace', ['ui.router', 'ngCookies', 'leaflet-directive']);
 
+
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-//     .state({
-//       name: 'happyplace',
-//       url: '/happyplace',
-//       templateUrl: 'landing.html',
-//       controller: 'HappyPlaceLandingController'
-//     })
+    .state({
+      name: 'happyplace',
+      url: '/happyplace',
+      templateUrl: 'landing.html',
+      controller: 'HappyPlaceLandingController'
+    })
 //     .state({
 //       name: 'login',
 //       url: '/login',
@@ -51,6 +52,16 @@ app.factory('happyplaceService', function($http, $cookies, $rootScope, $state) {
 
 app.controller("MyHappyPlacesMapController", function($scope, $stateParams, $state, happyplaceService, $cookies, $rootScope) {
 
+    var happyMarker = {
+      iconUrl: "img/happyplace2.png",
+      shadowUrl: "img/markers_shadow.png",
+      iconSize: [45, 45],
+      iconAnchor:   [17, 42],
+      popupAnchor: [1, -32],
+      shadowAnchor: [25, 3],
+      shadowSize: [36, 16],
+    };
+
   $scope.username = $stateParams.username;
   // $scope.username = 'mwdowns';
   console.log('stateParams', $stateParams);
@@ -63,6 +74,7 @@ app.controller("MyHappyPlacesMapController", function($scope, $stateParams, $sta
     group: 'world',
     focus: true,
     message: "ATV: Home of HappyPlace",
+    icon: happyMarker,
     draggable: false,
     options: {
       noHide: true
@@ -76,6 +88,29 @@ app.controller("MyHappyPlacesMapController", function($scope, $stateParams, $sta
       lat: 33.84867194475872,
       lng: -84.37333703041077,
       zoom: 12
+    },
+    layers: {
+      baselayers: {
+        // googleTerrain: {
+        //   name: 'Google Terrain',
+        //   layerType: 'TERRAIN',
+        //   type: 'google'
+        // },
+        mapbox_light: {
+          name: 'Mapbox Light',
+          url: 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXdkb3ducyIsImEiOiJjaXd5MXVpZm4wMWZsMnpxcm5vbDVhcHZwIn0.m_HmCvf10RP_go_r3sFroQ',
+          type: 'xyz',
+          layerOptions: {
+            apikey: 'pk.eyJ1IjoibXdkb3ducyIsImEiOiJjaXd5MXVpZm4wMWZsMnpxcm5vbDVhcHZwIn0.m_HmCvf10RP_go_r3sFroQ',
+            mapid: 'mwdowns'
+          }
+        },
+        osm: {
+          name: 'OpenStreetMap',
+          url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          type: 'xyz'
+        }
+      }
     },
     // markers: {
     //   mainMarker: angular.copy(mainMarker)
@@ -101,6 +136,7 @@ app.controller("MyHappyPlacesMapController", function($scope, $stateParams, $sta
         group: 'world',
         focus: true,
         message: happyplaces.data[i].message,
+        icon: happyMarker,
         draggable: false,
         options: {
           noHide: true
